@@ -1,19 +1,50 @@
 <html>
 	<head>
 		<title>wall</title>
+		<link rel='stylesheet' type='text/css' href='/static/style.css?={{session["css"]}}'>
 	</head>
 	<body>
-		<p>{{message}}<p>
-		<form action='/register' method='POST'>
-			<input type='submit' value='Register'>
-		</form>
+		{% if message %}
+			<p>{{message}}<p>
+		{% else %}
+			<form action='/register' method='POST'>
+				<input type='submit' value='Register'>
+			</form>
+		{% endif %}
 		<form action='/login' method='POST'>
 			<input type='submit' value='Login'>
+		</form>
+		<form action='/logout' method='POST'>
+			<input type='submit' value='Logout'>
+		</form>	
+
+		<h3>Post a message</h3>
+		<form action='/newmsg' method='POST'>
+			<input type='textarea' name='newmsg'>
+			<input type='submit' value='Post message!'>
 		</form>
 
 
 		{% if user_messages %}
-			<p>bla</p>
+			{% for msg in user_messages %}
+				<hr>
+					<h4>{{msg['first_name']+' '+msg['last_name']+' - '+msg['created_at'].strftime('%B %d %Y %-H:%M')}}</h4>
+					<p>{{msg['message']}}</p>
+
+					{% if msg['commentlist'] %}
+						{% for comment in msg['commentlist'] %}
+							<h5>{{comment['first_name']+' '+comment['last_name']+' - '+comment['created_at'].strftime('%B %d %Y %-H:%M')}}</h5>
+							<p>{{comment['comment']}}</p>
+						{% endfor %}
+						<h3>Post a comment</h3>
+						<form action='/newcmnt' method='POST'>
+							<input type='hidden' name='msgnum' value='{{msg['id']}}'>
+							<input type='textarea' name='newcmnt'>
+							<input type='submit' value='Post comment!'>
+						</form>
+					{% endif %}
+
+			{% endfor %}
 		{% endif %}
 	</body>
 </html>

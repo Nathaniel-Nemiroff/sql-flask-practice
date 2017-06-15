@@ -1,0 +1,9 @@
+p{
+	padding:0px 10px;
+}
+h5{
+	padding:0px 20px;
+}
+h5 + p{
+	padding:0px 20px;
+}
