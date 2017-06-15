@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<title>Friends</title>
+	</head>
+	<body>
+		<form action='/emails' method='POST'>
+			<label for='email'>Email Address:
+				<input type='text' name='email' id='email'></label>
+			<input type='submit' value='Submit'>
+		</form>
+		<h3>{{msg}}</h3>
+		<hr>
+		{% if all_emails %}
+		<table>
+				{% for email in all_emails: %}
+					<tr>
+						<td>{{email['email'] }}</td>
+						<td>{{email['created_at']}}</td>
+					</tr>
+				{% endfor %}
+		</table>
+		{% endif %}
+
+
+
+
+	</body>
+</html>
