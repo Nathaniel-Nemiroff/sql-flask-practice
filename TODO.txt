@@ -1,0 +1,4 @@
+DO NOT USE MV5 USE BCRYPT (or something)
+remember to sqitch virtualenv -> source flaskEnv/bin/activate
+figure out how to change source/environment with a shell command (source command is affected by scope and deactivates once the script is terminated)
+source  ~/.env/flaskenv/bin/activate
